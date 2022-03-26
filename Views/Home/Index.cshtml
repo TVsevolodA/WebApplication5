@@ -1,0 +1,22 @@
+﻿<style>
+    input, select {
+        width: 150px;
+        height: 20px;
+    }
+
+    #enter {
+        width: auto;
+        height: auto;
+    }
+</style>
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    <input type="number" value="@ViewData["first"]" name="firstNumber" />
+    @Html.DropDownList("action", new MultiSelectList(new string[] { "+", "-", "*", "/" }))
+    <input type="number"  value="@ViewData["second"]" name="secondNumber" />
+    <span>=</span>
+    <input type="text" value="@ViewData["Result"]" disabled />
+    <br />
+    <input id="enter" type="submit" />
+}
