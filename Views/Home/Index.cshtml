@@ -1,22 +1,24 @@
 ﻿<style>
-    input, select {
-        width: 150px;
-        height: 20px;
-    }
-
-    #enter {
-        width: auto;
-        height: auto;
+    #Result {
+        width: 128px;
+        height: 32px;
+        text-align:right;
     }
 </style>
 
 @using (Html.BeginForm("Index", "Home", FormMethod.Post))
 {
-    <input type="number" value="@ViewData["first"]" name="firstNumber" />
-    @Html.DropDownList("action", new MultiSelectList(new string[] { "+", "-", "*", "/" }))
-    <input type="number"  value="@ViewData["second"]" name="secondNumber" />
-    <span>=</span>
-    <input type="text" value="@ViewData["Result"]" disabled />
-    <br />
-    <input id="enter" type="submit" />
+    <input id="Result" type="text" value="@ViewData["Result"]" name="str" />
+    @Html.Partial("Calculator");
 }
+
+<script>
+    function getValue(elem) {
+        if (elem.value == "⌫") document.getElementById("Result").value = document.getElementById("Result").value.slice(0, -1);
+        else document.getElementById("Result").value = document.getElementById("Result").value + elem.value;
+    }
+
+    function clearField() {
+        document.getElementById("Result").value = "";
+    }
+</script>

@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Data;
+using System.Web.Mvc;
 
 namespace WebApplication5.Controllers
 {
@@ -10,53 +12,26 @@ namespace WebApplication5.Controllers
             return View();
         }
 
+        private static DataTable Table { get; } = new DataTable();
+        public static double Calc(string Expression) => Convert.ToDouble(Table.Compute(Expression, string.Empty));
         [HttpPost]
-        public ActionResult Index(float? firstNumber, string action, float? secondNumber)
+        public ActionResult Index(string str)
         {
-            if (firstNumber == null)
+            Boolean flag = false;
+            String result = "";
+            
+            try
             {
-                if (action == "-")
-                {
-                    ViewData["Result"] = -secondNumber;
-                }
-                else
-                {
-                    ViewData["Result"] = secondNumber;
-                }
+                result = Calc(str).ToString();
             }
-            else if (secondNumber == null)
+            catch
             {
-                ViewData["Result"] = firstNumber;
+                flag = true;
             }
-            else if (firstNumber == null && secondNumber == null)
-            {
-                ViewData["Result"] = "";
-            }
-            else
-            {
-                switch (action)
-                {
-                    case ("+"):
-                        ViewData["Result"] = firstNumber + secondNumber;
-                        break;
-                    case ("-"):
-                        ViewData["Result"] = firstNumber - secondNumber;
-                        break;
-                    case ("*"):
-                        ViewData["Result"] = firstNumber * secondNumber;
-                        break;
-                    case ("/"):
-                        if (secondNumber == 0)
-                        {
-                            ViewData["Result"] = "Нельзя делить на 0";
-                            break;
-                        }
-                        ViewData["Result"] = firstNumber / secondNumber;
-                        break;
-                }
-            }
-            ViewData["first"] = firstNumber;
-            ViewData["second"] = secondNumber;
+            
+            if (flag || result == "∞" || result == "-∞" || result == "не число")
+                result = "Ошибка вычислений";
+            ViewData["Result"] = result;
             return View();
         }
 

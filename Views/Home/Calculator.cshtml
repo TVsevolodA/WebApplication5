@@ -1,0 +1,50 @@
+﻿<style>
+    button {
+        width: 32px;
+        height: 32px;
+        background: gray;
+    }
+
+    #enter {
+        width: 32px;
+        height: 64px;
+        background: gray;
+    }
+
+    #line {
+        display: flex;
+        justify-content: start;
+    }
+</style>
+
+<div id="line">
+    <button onclick="clearField(); return false;" value="C">C</button>
+    <button onclick="getValue(this); return false;" value="/">/</button>
+    <button onclick="getValue(this); return false;" value="*">*</button>
+    <button onclick="getValue(this); return false;" value="⌫">⌫</button>
+</div>
+<div id="line">
+    <button onclick="getValue(this); return false;" value="7">7</button>
+    <button onclick="getValue(this); return false;" value="8">8</button>
+    <button onclick="getValue(this); return false;" value="9">9</button>
+    <button onclick="getValue(this); return false;" value="-">-</button>
+</div>
+<div id="line">
+    <button onclick="getValue(this); return false;" value="4">4</button>
+    <button onclick="getValue(this); return false;" value="5">5</button>
+    <button onclick="getValue(this); return false;" value="6">6</button>
+    <button onclick="getValue(this); return false;" value="+">+</button>
+</div>
+<div id="line">
+    <div>
+        <div id="line">
+            <button onclick="getValue(this); return false;" value="1">1</button>
+            <button onclick="getValue(this); return false;" value="2">2</button>
+            <button onclick="getValue(this); return false;" value="3">3</button>
+        </div>
+        <div id="line">
+            <button onclick="getValue(this); return false;" value="0">0</button>
+        </div>
+    </div>
+    <button id="enter" type="submit" value="=">=</button>
+</div>
